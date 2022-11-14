@@ -1,6 +1,9 @@
 library(lme4)
 library(mediation)
 library(dplyr)
+library(compute.es)
+library(lmerTest)
+library(sjstats)
 # demographic characteristics statistic (disperse）#
 group_test_disperse<-function(untwins_data,twins_data,data){
   income_data_com$demo_comb_income_v2_l<-as.numeric(income_data_com$demo_comb_income_v2_l)
@@ -102,7 +105,6 @@ media_computer<-function(function_socre,structure_info){
 ## linear regression process
 compute_T_value<-function(data,untwins_data,twins_data,task_name,cog_cbcl){
   #data<-light_id
-  library(compute.es)
   # ,structure_feature,cog_index
   #data<-feature_info
   # data<-cbcl_socre_base
@@ -131,7 +133,6 @@ compute_T_value<-function(data,untwins_data,twins_data,task_name,cog_cbcl){
   age_single<-twins_info[single_data,]$interview_age%>%as.numeric()
   single_site<-all_sitealsub[single_data,]
   single_race<-race_info[single_data,]
-  
   ##twins data ##
   income_data_com_twins<-income_data_com[twins_data,]$demo_comb_income_v2_l%>%as.numeric()
   age_info_father_twins<-age_info_father[twins_data,]$devhx_4_p%>%as.numeric()
@@ -179,8 +180,6 @@ compute_T_value<-function(data,untwins_data,twins_data,task_name,cog_cbcl){
   ## 11:89
   save_list<-list()
   ##18:106
-  library(lmerTest)
-  library(sjstats)
   if(cog_cbcl=="CBCL"){
     start_n=10
     seq_dep=4
